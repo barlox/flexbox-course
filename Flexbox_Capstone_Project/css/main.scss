@@ -1,0 +1,160 @@
+$color-blue1: #404f68;
+$color-blue2: #294B82;
+$color-blue3: #3A69B5;
+$color-blue4: #708BB5;
+$color-blue5: #212936;
+
+@mixin flexy($justify-content: null, $align-items: null) {
+  display        : flex;
+  justify-content: $justify-content;
+  align-items    : $align-items;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+:root {
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+}
+
+.nav-wrapper {
+  display: flex;
+  background-color: $color-blue1;
+}
+
+.menu {
+  justify-content: space-between;
+  flex: 1;
+}
+
+.burger {
+  display: none;
+  color: $color-blue5;
+}
+
+.name {
+  color: $color-blue5;
+}
+
+.logo {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding: 0.8rem 6rem 0.8rem 2rem;
+  background-color: $color-blue1;
+  text-align: center;
+}
+
+.menu,
+.sub-menu,
+.left-menu,
+.right-menu {
+  margin : 0;
+  padding: 0;
+  @include flexy(null, center);
+
+  li {
+    list-style: none;
+  }
+}
+
+
+.left-menu, .right-menu {
+  height: 100%;
+  
+  li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: $color-blue5;
+    width: 100px;    
+    cursor: pointer;
+    transition: 0.2s linear;
+
+    &:hover {
+      background-color: $color-blue2;
+    }
+  }
+}
+
+.sub-menu {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+}
+
+.menu-link, .sub-menu-link {
+  width: 100%;
+  height: 100%;
+  @include flexy(center, center);
+  text-decoration: none;
+  color: whitesmoke;
+}
+
+@media ( max-width: 48rem ) {
+  
+  .logo {
+    display: flex;
+    padding: 0;
+    position: fixed;
+    z-index: 5;
+  }
+
+  .burger {
+    display: block;
+    padding: 0.8rem 1.6rem;
+    cursor: pointer;
+
+    &:active {
+      background-color: $color-blue5;
+      color: white;
+    }
+  }
+
+  .name {
+    padding: 0.8rem 0 0.8rem 2rem;
+    flex: 1;
+    text-align: left;
+  }
+
+  .logo, .left-menu li, .right-menu li {
+    width: 100%;
+  }
+
+  .left-menu li, .right-menu li {
+    padding: 1.5rem 0;
+  }
+
+  .menu {
+    transform: translateY(-15rem);
+    position: absolute;
+    overflow: hidden;
+    transition: 0.5s all;
+    opacity: 0;
+  }
+
+  .menu-visible {
+    transform: translateY(0);
+    overflow: visible;
+    top: 3rem;
+    transition: 0.5s all;
+    opacity: 1;
+  }
+  .burger-click {
+    background-color: $color-blue5;
+    color: white;
+  }
+
+  .nav-wrapper, .menu, .sub-menu, .left-menu, .right-menu {
+    flex-direction: column;
+    width: 100%;
+  }
+}
